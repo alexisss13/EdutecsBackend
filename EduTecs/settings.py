@@ -27,8 +27,20 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-CORS_ALLOW_ALL_ORIGINS = True
+# 1. Desactiva el permiso universal (IMPORTANTE para seguridad)
+CORS_ALLOW_ALL_ORIGINS = False 
 
+# 2. Lista Blanca: Solo quiénes pueden "hablar" con tu API
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:4200",              # Para que sigas trabajando en tu PC
+    "http://127.0.0.1:4200",              # Alternativa local
+    "https://edutecs-frontend.vercel.app" # <--- TU FRONTEND REAL DESPLEGADO
+]
+
+# 3. Confianza para formularios y peticiones seguras (POST, PUT, DELETE)
+CSRF_TRUSTED_ORIGINS = [
+    "https://edutecs-frontend.vercel.app", # <--- TU FRONTEND REAL
+]
 
 
 # Application definition
@@ -89,7 +101,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'edutecs',      
         'USER': 'root',         
-        'PASSWORD': 'Tecsup.2025',           
+        'PASSWORD': '',           
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -117,7 +129,9 @@ AUTH_PASSWORD_VALIDATORS = [
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 5,
+    'PAGE_SIZE': 6,
+    'MAX_PAGE_SIZE': 1000,
+    'PAGE_SIZE_QUERY_PARAM': 'page_size',
 }
 
 
