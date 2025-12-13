@@ -2,6 +2,7 @@ from django.urls import path
 from .views import (
     TecnicaListAPIView,
     CarreraListAPIView,
+    TecnicaExportAPIView,
     MomentoClaseListAPIView,
     PensamientoListAPIView,
     TipoAgrupacionListAPIView,
@@ -11,6 +12,8 @@ from .views import (
 
 urlpatterns = [
     path('tecnicas/', TecnicaListAPIView.as_view(), name='tecnica-list'),
+
+    path('tecnicas/exportar/', TecnicaExportAPIView.as_view(), name='tecnica-export'),
     path('carreras/', CarreraListAPIView.as_view(), name='carrera-list'),
     path('momentos/', MomentoClaseListAPIView.as_view(), name='momentoclase-list'),
     path('pensamientos/', PensamientoListAPIView.as_view(), name='pensamiento-list'),

@@ -68,3 +68,6 @@ class TecnicaListAPIView(generics.ListAPIView):
         'dificultades__nombre': ['exact', 'in'],
     }
     search_fields = ['nombre']
+
+class TecnicaExportAPIView(TecnicaListAPIView):
+    pagination_class = None
